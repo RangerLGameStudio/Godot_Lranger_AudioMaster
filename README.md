@@ -7,16 +7,16 @@ Files Included:
 AudioManagerAutoload.gd:
 
 This script is the core of our audio manager.
-Remember to set it as autoload in your project
+Remember to set it as autoload in your project.
 
 AudioSFXFXRequest.gd:
 
-This is the resource type that makes requests to AudioManagerAutoload
+This is the resource type that makes requests to AudioManagerAutoload.
 
 Additional Configurations:
 
-Remember to set the Audio Manager as an autoload
-Set Up The Audio Bus System as shown in the video(Master, BGM, FX, SFX)
+Remember to set the Audio Manager as an autoload.
+Set Up The Audio Bus System as shown in the video(Master, BGM, FX, SFX).
 
 
 
