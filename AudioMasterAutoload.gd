@@ -1,6 +1,7 @@
 extends Node
 class_name AudioMaster_Autoload
 
+#region Variables
 var num_players_SFX = 8
 var num_player_FX = 4
 var BGMBus = "BGM"
@@ -16,6 +17,9 @@ var SFXqueue: Array[AudioSFXFXRequest] = []
 var FXqueue: Array[AudioSFXFXRequest] = []
 var SFXPlayerToRequestDict: Dictionary
 var FXPlayerToRequestDict: Dictionary
+#endregion
+
+
 
 func _ready():
 	BGMAudioPlayer = AudioStreamPlayer.new()
@@ -36,20 +40,22 @@ func _ready():
 		p.finished.connect(_on_FXstream_finished.bind(p))
 		p.bus = FXBus
 	
-	#TESTONLY
-	#call_deferred("play_BGM", "res://Assets/Audio/BGM/Forest of beginning.mp3")
-func play_BGM(sound_path):
+	
+func PlayBGM(sound_path):
 	if BGM_name == sound_path:
 		return
 	BGMAudioPlayer.stream = load(sound_path)
 	BGMAudioPlayer.play()
 	BGM_name = sound_path
-func stop_BGM():
+func StopBGM():
 	BGMAudioPlayer.stream_paused=true
-func resume_BGM():
+func ResumeBGM():
 	BGMAudioPlayer.stream_paused=false
 	
 	
+	
+	
+#region These are private functions
 func _on_SFXstream_finished(stream):
 	if SFXPlayerToRequestDict[stream].RemoveAtEnd:
 		ReturnSFXPlayerToQueue(stream)
@@ -61,11 +67,12 @@ func _on_FXstream_finished(stream):
 		ReturnFXPlayerToQueue(stream)
 	else:
 		stream.play(0.0)
+#endregion 
 
-func play_SFX(soundRequest: AudioSFXFXRequest):
+func PlaySFX(soundRequest: AudioSFXFXRequest):
 	SFXqueue.append(soundRequest)
 
-func play_FX(soundRequest: AudioSFXFXRequest):
+func PlayFX(soundRequest: AudioSFXFXRequest):
 	FXqueue.append(soundRequest)
 
 func SearchAndRemoveSFX(soundpath: String):
